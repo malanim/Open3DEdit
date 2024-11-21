@@ -1,0 +1,32 @@
+2024-11-21 11:48:47,668 - scene_tests - INFO - Test test_add_light passed
+2024-11-21 11:48:47,669 - scene_tests - INFO - Test test_add_object passed
+2024-11-21 11:48:47,669 - scene_tests - INFO - Test test_get_objects passed
+2024-11-21 11:48:47,670 - scene_tests - INFO - Test test_initialization passed
+2024-11-21 11:48:47,670 - scene_tests - INFO - Test test_remove_object passed
+2024-11-21 11:48:47,670 - scene_tests - INFO - Test test_update passed
+2024-11-21 11:48:47,672 - renderer_tests - ERROR - Test test_clear_screen failed
+2024-11-21 11:48:47,674 - renderer_tests - ERROR - Test test_draw_point failed
+2024-11-21 11:48:47,677 - renderer_tests - ERROR - Test test_initialization failed
+2024-11-21 11:48:47,678 - renderer_tests - ERROR - Test test_render failed
+2024-11-21 11:48:47,679 - object_tests - ERROR - Test test_object3d_initialization failed
+2024-11-21 11:48:47,679 - object_tests - ERROR - Test test_object3d_rotate failed
+2024-11-21 11:48:47,679 - object_tests - ERROR - Test test_object3d_scale failed
+2024-11-21 11:48:47,680 - object_tests - ERROR - Test test_object3d_translate failed
+2024-11-21 11:48:47,680 - camera_tests - ERROR - Test test_custom_initialization failed
+2024-11-21 11:48:47,681 - camera_tests - ERROR - Test test_get_view_matrix failed
+2024-11-21 11:48:47,681 - camera_tests - ERROR - Test test_initialization failed
+2024-11-21 11:48:47,682 - camera_tests - ERROR - Test test_move failed
+2024-11-21 11:48:47,682 - input_handler_tests - ERROR - Test test_initialization failed
+2024-11-21 11:48:47,683 - input_handler_tests - ERROR - Test test_is_key_pressed failed
+2024-11-21 11:48:47,684 - input_handler_tests - ERROR - Test test_process_input_no_keys failed
+2024-11-21 11:48:47,685 - input_handler_tests - ERROR - Test test_process_input_with_keys failed
+2024-11-21 11:48:47,686 - input_handler_tests - ERROR - Test test_quit_key failed
+2024-11-21 11:48:47,690 - engine_tests - ERROR - Test test_frame_timing failed
+2024-11-21 11:48:47,693 - engine_tests - ERROR - Test test_initialization failed
+2024-11-21 11:48:47,695 - engine_tests - ERROR - Test test_render failed
+2024-11-21 11:48:47,696 - engine_tests - ERROR - Test test_stop failed
+2024-11-21 11:48:47,698 - engine_tests - ERROR - Test test_update failed
+2024-11-21 11:48:47,700 - all_tests - INFO - Total tests: 36
+2024-11-21 11:48:47,701 - all_tests - INFO - Passed: 30
+2024-11-21 11:48:47,701 - all_tests - INFO - Failed: 6
+2024-11-21 11:48:47,701 - all_tests - INFO - All test results have been saved

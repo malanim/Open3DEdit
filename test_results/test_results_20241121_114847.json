@@ -1,0 +1,147 @@
+{
+    "test_get_view_matrix": {
+        "status": "FAILED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_camera.py\", line 58, in test_get_view_matrix\n    self.assertEqual(matrix, [[1, 0, 0, 0],\nAssertionError: Lists differ: [[-1.0, 0.0, 0.0, -0.0], [0.0, 1.0, -0.0, -[41 chars], 1]] != [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]\n\nFirst differing element 0:\n[-1.0, 0.0, 0.0, -0.0]\n[1, 0, 0, 0]\n\n+ [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]\n- [[-1.0, 0.0, 0.0, -0.0],\n-  [0.0, 1.0, -0.0, -0.0],\n-  [-0.0, -0.0, -1.0, -10.0],\n-  [0, 0, 0, 1]]\n"
+    },
+    "test_frame_timing": {
+        "status": "FAILED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": "Traceback (most recent call last):\n  File \"C:\\Program Files\\Python312\\Lib\\unittest\\mock.py\", line 1393, in patched\n    return func(*newargs, **newkeywargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_engine.py\", line 92, in test_frame_timing\n    mock_sleep.assert_called_once()\n  File \"C:\\Program Files\\Python312\\Lib\\unittest\\mock.py\", line 926, in assert_called_once\n    raise AssertionError(msg)\nAssertionError: Expected 'sleep' to have been called once. Called 0 times.\n"
+    },
+    "test_clear_screen": {
+        "status": "FAILED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\renderer.py\", line 22, in initialize\n    self.height, self.width = screen.getmaxyx()\n    ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: not enough values to unpack (expected 2, got 0)\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_renderer.py\", line 40, in test_clear_screen\n    self.renderer.initialize(self.mock_screen)\n  File \"c:\\git_prog\\Open3DEdit\\renderer.py\", line 35, in initialize\n    raise RuntimeError(f\"Failed to initialize renderer: {str(e)}\")\nRuntimeError: Failed to initialize renderer: not enough values to unpack (expected 2, got 0)\n"
+    },
+    "test_draw_point": {
+        "status": "FAILED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\renderer.py\", line 22, in initialize\n    self.height, self.width = screen.getmaxyx()\n    ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: not enough values to unpack (expected 2, got 0)\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_renderer.py\", line 46, in test_draw_point\n    self.renderer.initialize(self.mock_screen)\n  File \"c:\\git_prog\\Open3DEdit\\renderer.py\", line 35, in initialize\n    raise RuntimeError(f\"Failed to initialize renderer: {str(e)}\")\nRuntimeError: Failed to initialize renderer: not enough values to unpack (expected 2, got 0)\n"
+    },
+    "test_initialization": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_render": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_addition": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_length": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_normalize": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_scalar_multiplication": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_subtraction": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_identity": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_translation": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_add_light": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_add_object": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_get_objects": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_remove_object": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_update": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_object3d_initialization": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_object3d_rotate": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_object3d_scale": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_object3d_translate": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_custom_initialization": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_move": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_is_key_pressed": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_process_input_no_keys": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_process_input_with_keys": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_quit_key": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    },
+    "test_stop": {
+        "status": "PASSED",
+        "timestamp": "2024-11-21T11:48:47.698967",
+        "error_message": null
+    }
+}
