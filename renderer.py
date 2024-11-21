@@ -96,13 +96,16 @@ class Renderer:
         
         self.screen.refresh()
         
-    def _apply_matrix(self, point: List[float], matrix: List[List[float]]) -> List[float]:
+    def _apply_matrix(self, point, matrix: List[List[float]]) -> List[float]:
         """Apply matrix transformation to a point in homogeneous coordinates"""
         if not matrix or len(matrix) != 4 or any(len(row) != 4 for row in matrix):
             raise ValueError("Invalid transformation matrix")
             
-        # Convert point to homogeneous coordinates if needed
-        if len(point) == 3:
+        # Handle Vector3 objects
+        if hasattr(point, 'x'):
+            point = [point.x, point.y, point.z, 1.0]
+        # Handle regular sequences
+        elif len(point) == 3:
             point = [point[0], point[1], point[2], 1.0]
         elif len(point) != 4:
             raise ValueError("Point must have 3 or 4 coordinates")

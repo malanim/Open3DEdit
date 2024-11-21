@@ -40,6 +40,19 @@ class Vector3:
             self.z * other.x - self.x * other.z,
             self.x * other.y - self.y * other.x
         )
+    
+    def __len__(self):
+        return 3
+        
+    def __getitem__(self, key):
+        if key == 0:
+            return self.x
+        elif key == 1:
+            return self.y
+        elif key == 2:
+            return self.z
+        else:
+            raise IndexError("Vector3 index out of range")
 
 class Matrix4:
     """Class representing a 4x4 matrix for 3D transformations"""

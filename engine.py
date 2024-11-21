@@ -18,6 +18,7 @@ class Engine:
         self.last_time = 0.0
         self.target_fps = 30
         self.frame_time = 1.0 / self.target_fps
+        self.screen = None
         
     def initialize(self) -> None:
         """Инициализация движка"""

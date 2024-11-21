@@ -27,12 +27,6 @@ def main():
     Main function to initialize and run the 3D engine
     """
     try:
-        # Initialize curses
-        screen = curses.initscr()
-        curses.noecho()
-        curses.cbreak()
-        curses.curs_set(0)
-        
         # Create main components
         scene = Scene()
         scene = initialize_demo_scene(scene)
@@ -40,12 +34,9 @@ def main():
         renderer = Renderer()
         input_handler = InputHandler()
         
-        # Initialize components with screen
-        renderer.initialize(screen)
-        input_handler.initialize(screen)
-        
-        # Initialize engine
+        # Create and initialize engine
         engine = Engine(scene, camera, renderer, input_handler)
+        engine.initialize()
         
         # Main loop variables
         target_fps = 30
@@ -79,14 +70,7 @@ def main():
     except Exception as e:
         print(f"\nError: {str(e)}")
     finally:
-        # Cleanup curses
-        if 'screen' in locals():
-            curses.nocbreak()
-            screen.keypad(False)
-            curses.echo()
-            curses.endwin()
-        
-        # Cleanup engine
+        # Cleanup engine (which handles curses cleanup)
         if 'engine' in locals():
             engine.cleanup()
 
