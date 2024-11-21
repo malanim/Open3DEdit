@@ -81,6 +81,7 @@ class TestEngine(unittest.TestCase):
         
     def test_state_transitions(self):
         """Test game state transitions"""
+        # Test valid transitions
         self.engine.set_state("running")
         self.assertEqual(self.engine.state, "running")
         self.assertEqual(self.engine.previous_state, "initializing")
@@ -89,16 +90,29 @@ class TestEngine(unittest.TestCase):
         self.assertEqual(self.engine.state, "paused")
         self.assertEqual(self.engine.previous_state, "running")
         
+        # Test invalid transitions
+        with self.assertRaises(ValueError):
+            self.engine.set_state("initializing")  # Can't go back to initializing from paused
+            
+        with self.assertRaises(ValueError):
+            self.engine.set_state("invalid_state")
+        
     def test_component_readiness(self):
         """Test component readiness checking"""
         self.assertFalse(self.engine.check_components_ready())
         
-        self.engine.components_ready['scene'] = True
-        self.engine.components_ready['camera'] = True
-        self.engine.components_ready['renderer'] = True
-        self.engine.components_ready['input'] = True
+        # Test valid component status updates
+        self.engine.set_component_status('scene', True)
+        self.engine.set_component_status('camera', True)
+        self.engine.set_component_status('renderer', True)
+        self.engine.set_component_status('input', True)
         
         self.assertTrue(self.engine.check_components_ready())
+        self.assertEqual(self.engine.state, "running")
+        
+        # Test invalid component name
+        with self.assertRaises(KeyError):
+            self.engine.set_component_status('invalid_component', True)
 
     @patch('time.sleep')
     def test_frame_timing(self, mock_sleep):

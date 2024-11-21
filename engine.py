@@ -1,5 +1,6 @@
 import time
 import curses
+import logging
 from typing import List
 from scene import Scene
 from camera import Camera
@@ -25,15 +26,8 @@ class Engine:
             renderer: Рендерер для отрисовки в консоли
             input_handler: Обработчик пользовательского ввода
         """
+        self.logger = logging.getLogger(__name__)
         # Core components
-        """Инициализация движка
-        
-        Args:
-            scene: Сцена с 3D объектами
-            camera: Камера для отображения сцены
-            renderer: Рендерер для отрисовки в консоли
-            input_handler: Обработчик пользовательского ввода
-        """
         self.scene = scene
         self.camera = camera
         self.renderer = renderer
@@ -80,8 +74,43 @@ class Engine:
         self.state = new_state
         
     def check_components_ready(self) -> bool:
-        """Проверка готовности всех компонентов"""
-        return all(self.components_ready.values())
+        """Проверка готовности всех компонентов и их состояния"""
+        if not all(self.components_ready.values()):
+            return False
+            
+        # Validate component states
+        try:
+            if not self.scene.is_valid():
+                self.logger.error("Scene validation failed")
+                return False
+            if not self.camera.is_initialized():
+                self.logger.error("Camera not initialized")
+                return False
+            if not self.renderer.is_ready():
+                self.logger.error("Renderer not ready")
+                return False
+            if not self.input_handler.is_active():
+                self.logger.error("Input handler not active")
+                return False
+            return True
+        except Exception as e:
+            self.logger.error(f"Component validation failed: {str(e)}")
+            return False
+        
+    def set_component_status(self, component: str, status: bool) -> None:
+        """Update component ready status
+        
+        Args:
+            component: Component name ('scene', 'camera', 'renderer', 'input')
+            status: Ready status (True/False)
+            
+        Raises:
+            KeyError: If component name is invalid
+        """
+        if component not in self.components_ready:
+            raise KeyError(f"Invalid component name: {component}")
+            
+        self.components_ready[component] = status
         
     def initialize(self) -> None:
         """Инициализация движка
@@ -91,6 +120,7 @@ class Engine:
         - Настройку экрана и параметров ввода
         - Инициализацию всех компонентов движка
         """
+        self.logger.info("Initializing engine...")
         # Инициализация curses
         self.screen = curses.initscr()
         curses.noecho()
@@ -109,10 +139,11 @@ class Engine:
             self.components_ready['scene'] = True
             self.components_ready['camera'] = True
             
-            if self.check_components_ready():
-                self.set_state("running")
-            else:
+            if not self.check_components_ready():
+                self.logger.error("Not all components initialized properly")
                 raise RuntimeError("Not all components initialized properly")
+            self.set_state("running")
+            self.logger.info("Engine initialization completed successfully")
                 
         except Exception as e:
             self.cleanup()
@@ -142,6 +173,7 @@ class Engine:
             self.initialize()
             self.running = True
             self.last_time = time.time()
+            self.logger.info("Starting game loop")
             
             while self.running:
                 current_time = time.time()

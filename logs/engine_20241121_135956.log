@@ -1,0 +1,7 @@
+2024-11-21 13:59:56,342 - __main__ - INFO - Starting 3D Engine Demo
+2024-11-21 13:59:56,342 - __main__ - INFO - Creating core components
+2024-11-21 13:59:56,342 - engine - INFO - Initializing engine...
+2024-11-21 13:59:56,354 - engine - ERROR - Component validation failed: 'Scene' object has no attribute 'is_valid'
+2024-11-21 13:59:56,354 - engine - ERROR - Not all components initialized properly
+2024-11-21 13:59:56,355 - __main__ - ERROR - 
+Error: Initialization failed: Not all components initialized properly

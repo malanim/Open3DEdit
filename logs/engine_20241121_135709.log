@@ -1,0 +1,34 @@
+2024-11-21 13:57:09,783 - scene_tests - INFO - test_scene.py:33 - Test test_add_light passed
+2024-11-21 13:57:09,784 - scene_tests - INFO - test_scene.py:33 - Test test_add_object passed
+2024-11-21 13:57:09,784 - scene_tests - INFO - test_scene.py:33 - Test test_get_objects passed
+2024-11-21 13:57:09,785 - scene_tests - INFO - test_scene.py:33 - Test test_initialization passed
+2024-11-21 13:57:09,785 - scene_tests - INFO - test_scene.py:33 - Test test_remove_object passed
+2024-11-21 13:57:09,785 - scene_tests - INFO - test_scene.py:33 - Test test_update passed
+2024-11-21 13:57:09,788 - renderer_tests - ERROR - test_renderer.py:28 - Test test_clear_screen failed
+2024-11-21 13:57:09,790 - renderer_tests - ERROR - test_renderer.py:28 - Test test_draw_point failed
+2024-11-21 13:57:09,791 - renderer_tests - ERROR - test_renderer.py:28 - Test test_initialization failed
+2024-11-21 13:57:09,792 - renderer_tests - ERROR - test_renderer.py:28 - Test test_render failed
+2024-11-21 13:57:09,793 - object_tests - ERROR - test_object.py:24 - Test test_object3d_initialization failed
+2024-11-21 13:57:09,793 - object_tests - ERROR - test_object.py:24 - Test test_object3d_rotate failed
+2024-11-21 13:57:09,793 - object_tests - ERROR - test_object.py:24 - Test test_object3d_scale failed
+2024-11-21 13:57:09,794 - object_tests - ERROR - test_object.py:24 - Test test_object3d_translate failed
+2024-11-21 13:57:09,794 - camera_tests - ERROR - test_camera.py:24 - Test test_custom_initialization failed
+2024-11-21 13:57:09,794 - camera_tests - ERROR - test_camera.py:24 - Test test_get_view_matrix failed
+2024-11-21 13:57:09,794 - camera_tests - ERROR - test_camera.py:24 - Test test_initialization failed
+2024-11-21 13:57:09,795 - camera_tests - ERROR - test_camera.py:24 - Test test_move failed
+2024-11-21 13:57:09,796 - input_handler_tests - ERROR - test_input_handler.py:26 - Test test_initialization failed
+2024-11-21 13:57:09,797 - input_handler_tests - ERROR - test_input_handler.py:26 - Test test_is_key_pressed failed
+2024-11-21 13:57:09,798 - input_handler_tests - ERROR - test_input_handler.py:26 - Test test_process_input_no_keys failed
+2024-11-21 13:57:09,799 - input_handler_tests - ERROR - test_input_handler.py:26 - Test test_process_input_with_keys failed
+2024-11-21 13:57:09,800 - input_handler_tests - ERROR - test_input_handler.py:26 - Test test_quit_key failed
+2024-11-21 13:57:09,801 - engine_tests - ERROR - test_engine.py:34 - Test test_component_readiness failed
+2024-11-21 13:57:09,805 - engine_tests - ERROR - test_engine.py:34 - Test test_frame_timing failed
+2024-11-21 13:57:09,808 - engine_tests - ERROR - test_engine.py:34 - Test test_initialization failed
+2024-11-21 13:57:09,810 - engine_tests - ERROR - test_engine.py:34 - Test test_render failed
+2024-11-21 13:57:09,811 - engine_tests - ERROR - test_engine.py:34 - Test test_state_transitions failed
+2024-11-21 13:57:09,812 - engine_tests - ERROR - test_engine.py:34 - Test test_stop failed
+2024-11-21 13:57:09,813 - engine_tests - ERROR - test_engine.py:34 - Test test_update failed
+2024-11-21 13:57:10,820 - all_tests - INFO - run_all_tests.py:76 - Total tests: 41
+2024-11-21 13:57:10,820 - all_tests - INFO - run_all_tests.py:77 - Passed: 33
+2024-11-21 13:57:10,820 - all_tests - INFO - run_all_tests.py:78 - Failed: 8
+2024-11-21 13:57:10,821 - all_tests - INFO - run_all_tests.py:79 - All test results have been saved

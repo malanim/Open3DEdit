@@ -46,11 +46,20 @@ class Renderer:
                 raise ValueError("Invalid screen dimensions")
                 
             if not self._initialized:
-                curses.start_color()
-                curses.use_default_colors()
-                for i in range(8):
-                    curses.init_pair(i + 1, i, -1)
-                self._initialized = True
+                try:
+                    if not curses.has_colors():
+                        raise RuntimeError("Terminal does not support colors")
+                    curses.start_color()
+                    curses.use_default_colors()
+                    for i in range(8):
+                        try:
+                            curses.init_pair(i + 1, i, -1)
+                        except curses.error as e:
+                            raise RuntimeError(f"Failed to initialize color pair {i}: {str(e)}")
+                    self._initialized = True
+                except Exception as e:
+                    self._initialized = False
+                    raise RuntimeError(f"Color initialization failed: {str(e)}")
             self.lights = lights or []
         except Exception as e:
             self._initialized = False

@@ -10,8 +10,25 @@ class InputHandler:
         
     def initialize(self, screen) -> None:
         """Инициализация обработчика ввода"""
-        self.screen = screen
-        self.screen.nodelay(True)  # Неблокирующий режим ввода
+        if screen is None:
+            raise ValueError("Screen cannot be None")
+            
+        try:
+            if not hasattr(screen, 'nodelay'):
+                raise ValueError("Invalid screen object provided")
+                
+            self.screen = screen
+            self.screen.nodelay(True)  # Неблокирующий режим ввода
+            
+            # Verify screen is properly initialized
+            try:
+                self.screen.getch()
+            except curses.error as e:
+                raise RuntimeError(f"Screen input test failed: {str(e)}")
+                
+        except Exception as e:
+            self.screen = None  # Reset state on failure
+            raise RuntimeError(f"Failed to initialize input handler: {str(e)}")
         
     def process_input(self) -> None:
         """Обработка пользовательского ввода"""
