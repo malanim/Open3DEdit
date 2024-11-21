@@ -84,6 +84,10 @@ class Engine:
             missing = [k for k, v in self.components_ready.items() if not v]
             self.logger.warning(f"Components not ready: {missing}")
             return False
+
+        # Add performance metrics
+        self.logger.info("Component readiness check started")
+        start_time = time.time()
             
         # Validate component states
         validations = {
@@ -94,15 +98,50 @@ class Engine:
         }
         
         try:
-            for component, (check_fn, error_msg) in validations.items():
+            for component, (check_fn, error_msg, validate_fn) in validations.items():
                 if not check_fn():
                     self.logger.error(error_msg)
                     self.components_ready[component] = False
+                    validate_fn()  # Run detailed validation
                     return False
+                    
+            check_time = time.time() - start_time
+            self.logger.info(f"Component validation completed in {check_time:.3f}s")
             return True
         except Exception as e:
             self.logger.error(f"Component validation failed: {str(e)}")
             return False
+            
+    def _validate_scene(self):
+        """Detailed scene validation"""
+        try:
+            if not hasattr(self.scene, 'objects'):
+                self.logger.error("Scene missing objects list")
+            elif not isinstance(self.scene.objects, list):
+                self.logger.error("Scene objects not a list")
+            else:
+                self.logger.info(f"Scene contains {len(self.scene.objects)} objects")
+        except Exception as e:
+            self.logger.error(f"Scene validation failed: {str(e)}")
+                
+    def _validate_camera(self):
+        """Detailed camera validation"""
+        if not hasattr(self.camera, 'position'):
+            self.logger.error("Camera missing position")
+        if not hasattr(self.camera, 'direction'):
+            self.logger.error("Camera missing direction")
+            
+    def _validate_renderer(self):
+        """Detailed renderer validation"""
+        if not self.renderer.screen:
+            self.logger.error("Renderer screen not initialized")
+        if not hasattr(self.renderer, 'lights'):
+            self.logger.error("Renderer missing lights list")
+            
+    def _validate_input(self):
+        """Detailed input handler validation"""
+        if not hasattr(self.input_handler, 'keys'):
+            self.logger.error("Input handler missing keys mapping")
         
     def set_component_status(self, component: str, status: bool) -> None:
         """Update component ready status

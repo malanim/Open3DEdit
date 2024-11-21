@@ -123,6 +123,16 @@ class TestEngine(unittest.TestCase):
         self.assertTrue(self.engine.check_components_ready())
         self.assertEqual(self.engine.state, "running")
         
+        # Test detailed validation
+        self.mock_scene.is_valid.return_value = False
+        self.assertFalse(self.engine.check_components_ready())
+        self.mock_scene.is_valid.assert_called_once()
+        
+        # Test validation timing
+        start_time = time.time()
+        self.engine.check_components_ready()
+        self.assertLess(time.time() - start_time, 1.0)  # Should complete quickly
+        
         # Test invalid component name
         with self.assertRaises(KeyError):
             self.engine.set_component_status('invalid_component', True)
