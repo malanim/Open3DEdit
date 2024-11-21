@@ -135,11 +135,11 @@ Open3DEdit — это простой 3D-движок, написанный на 
 1. Убедитесь, что у вас установлен Python версии 3.x.
 2. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/yourusername/My3DEngine.git
+   git clone https://github.com/malanim/Open3DEdit.git
    ```
 3. Перейдите в каталог репозитория:
    ```bash
-   cd My3DEngine
+   cd Open3DEdit
    ```
 
 ## Запуск
