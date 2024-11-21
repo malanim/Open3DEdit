@@ -16,7 +16,19 @@ class Object3D:
         self.specular = 0.3  # коэффициент зеркального отражения
         
     def transform(self) -> Matrix4:
-        """Get complete transformation matrix"""
+        """Получение полной матрицы трансформации объекта
+        
+        Комбинирует все преобразования объекта в следующем порядке:
+        1. масштабирование (scale) - изменение размеров объекта
+        2. поворот (rotation) - вращение вокруг локальных осей X, Y, Z
+        3. перемещение (translation) - смещение в мировых координатах
+        
+        Порядок применения важен, так как матричные операции не коммутативны.
+        
+        Returns:
+            Matrix4: Итоговая матрица трансформации для преобразования 
+                    локальных координат в мировые
+        """
         translation = Matrix4.translation(self.position.x, self.position.y, self.position.z)
         rotation_x = Matrix4.rotation_x(self.rotation.x)
         rotation_y = Matrix4.rotation_y(self.rotation.y)
@@ -26,12 +38,31 @@ class Object3D:
         return translation * rotation_z * rotation_y * rotation_x * scale
         
     def get_transformed_vertices(self) -> List[Vector3]:
-        """Get vertices after transformation"""
+        """Получение трансформированных вершин объекта
+        
+        Применяет текущую матрицу трансформации ко всем вершинам объекта.
+        Трансформация включает все текущие преобразования объекта:
+        - масштабирование
+        - поворот
+        - перемещение
+        
+        Используется для получения реального положения вершин в мировом пространстве
+        перед рендерингом.
+        
+        Returns:
+            List[Vector3]: Список вершин в мировых координатах
+        """
         transform = self.transform()
         return [transform * vertex for vertex in self.vertices]
 
     def translate(self, x: float, y: float, z: float) -> None:
-        """Translate object by given amounts"""
+        """Перемещение объекта на заданные величины
+        
+        Args:
+            x (float): Смещение по оси X
+            y (float): Смещение по оси Y
+            z (float): Смещение по оси Z
+        """
         self.position.x += x
         self.position.y += y
         self.position.z += z

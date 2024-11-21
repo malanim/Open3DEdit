@@ -1,7 +1,14 @@
 import math
 
 class Vector3:
-    """Class representing a 3D vector with basic operations"""
+    """Класс, представляющий трехмерный вектор с базовыми операциями
+    
+    Реализует основные математические операции над векторами:
+    - сложение и вычитание векторов
+    - умножение и деление на скаляр
+    - нормализация
+    - скалярное и векторное произведение
+    """
     
     def __init__(self, x=0, y=0, z=0):
         self.x = float(x)
@@ -55,7 +62,14 @@ class Vector3:
             raise IndexError("Vector3 index out of range")
 
 class Matrix4:
-    """Class representing a 4x4 matrix for 3D transformations"""
+    """Класс, представляющий матрицу 4x4 для 3D преобразований
+    
+    Реализует основные матричные преобразования:
+    - перемещение (translation)
+    - вращение (rotation) вокруг осей X, Y, Z
+    - масштабирование (scale)
+    - умножение матриц
+    """
     
     def __init__(self):
         # Initialize as identity matrix

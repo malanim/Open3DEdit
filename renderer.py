@@ -3,7 +3,14 @@ import curses
 from typing import List, Tuple
 
 class Renderer:
-    """Класс для рендеринга 3D сцены в консоли"""
+    """Класс для рендеринга 3D сцены в консоли
+
+    Отвечает за:
+    - Инициализацию экрана консоли
+    - Отрисовку точек с учетом глубины и освещения 
+    - Преобразование 3D координат в 2D координаты экрана
+    - Применение матриц преобразования к вершинам
+    """
     
     def __init__(self):
         self.screen = None
@@ -13,7 +20,15 @@ class Renderer:
         self._initialized = False
         
     def initialize(self, screen) -> None:
-        """Initialize the renderer"""
+        """Инициализация рендерера
+        
+        Args:
+            screen: Окно curses для отрисовки
+            
+        Raises:
+            ValueError: Если передан некорректный экран
+            RuntimeError: При ошибке инициализации
+        """
         if screen is None:
             raise ValueError("Screen cannot be None")
             
@@ -39,7 +54,17 @@ class Renderer:
         self.screen.clear()
         
     def draw_point(self, x: int, y: int, depth: float, intensity: float = 1.0) -> None:
-        """Draw a point with depth and lighting consideration"""
+        """Отрисовка точки с учетом глубины и освещения
+        
+        Args:
+            x: Координата x на экране
+            y: Координата y на экране  
+            depth: Глубина точки в диапазоне [-1, 1]
+            intensity: Интенсивность освещения [0, 1]
+        
+        Raises:
+            RuntimeError: Если рендерер не инициализирован
+        """
         if not self._initialized:
             raise RuntimeError("Renderer not initialized")
             
@@ -65,7 +90,21 @@ class Renderer:
             pass
             
     def render(self, scene, camera) -> None:
-        """Рендеринг сцены"""
+        """Рендеринг всей сцены
+        
+        Выполняет:
+        - Очистку экрана
+        - Получение матриц вида и проекции от камеры
+        - Преобразование координат вершин объектов
+        - Отрисовку всех видимых точек
+        
+        Args:
+            scene: Сцена с объектами для рендеринга
+            camera: Камера, определяющая точку обзора
+            
+        Raises:
+            RuntimeError: Если рендерер не инициализирован
+        """
         if not self.screen:
             raise RuntimeError("Renderer not initialized")
             
@@ -97,7 +136,18 @@ class Renderer:
         self.screen.refresh()
         
     def _apply_matrix(self, point, matrix: List[List[float]]) -> List[float]:
-        """Apply matrix transformation to a point in homogeneous coordinates"""
+        """Применение матричного преобразования к точке в однородных координатах
+        
+        Args:
+            point: Точка для преобразования (Vector3 или список из 3-4 координат)
+            matrix: Матрица преобразования 4x4
+            
+        Returns:
+            List[float]: Преобразованные координаты точки
+            
+        Raises:
+            ValueError: При некорректной матрице или точке
+        """
         if not matrix or len(matrix) != 4 or any(len(row) != 4 for row in matrix):
             raise ValueError("Invalid transformation matrix")
             

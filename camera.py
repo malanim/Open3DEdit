@@ -32,7 +32,19 @@ class Camera:
         self.far = far
 
     def get_projection_matrix(self) -> List[List[float]]:
-        """Получение матрицы проекции"""
+        """Получение матрицы проекции
+        
+        Создает матрицу перспективной проекции на основе параметров камеры:
+        - поля зрения (fov) - угол обзора камеры в градусах
+        - соотношения сторон (aspect) - отношение ширины к высоте viewport
+        - ближней и дальней плоскостей отсечения (near, far) - границы видимого пространства
+        
+        Матрица проекции преобразует координаты из пространства камеры
+        в нормализованные координаты устройства (NDC).
+        
+        Returns:
+            List[List[float]]: Матрица проекции 4x4
+        """
         f = 1.0 / math.tan(math.radians(self.fov) / 2.0)
         
         # Build perspective projection matrix
@@ -46,7 +58,19 @@ class Camera:
         return projection
 
     def get_view_matrix(self) -> List[List[float]]:
-        """Get the view transformation matrix"""
+        """Получение матрицы вида
+        
+        Создает матрицу преобразования вида на основе:
+        - позиции камеры
+        - точки наблюдения
+        - вектора "вверх"
+        
+        Матрица используется для преобразования координат из мировой системы
+        в систему координат камеры.
+        
+        Returns:
+            List[List[float]]: Матрица вида 4x4
+        """
         # Calculate forward vector (z-axis)
         forward = [
             self.target[0] - self.position[0],

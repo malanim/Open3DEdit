@@ -9,13 +9,20 @@ from object import Cube, Plane
 from vector import Vector3
 
 def initialize_demo_scene(scene):
-    """Initialize scene with demo objects"""
-    # Add a cube
+    """Инициализация демонстрационной сцены с базовыми объектами
+    
+    Args:
+        scene: Сцена для инициализации
+        
+    Returns:
+        Scene: Инициализированная сцена с добавленными объектами
+    """
+    # Добавляем куб
     cube = Cube(2.0)
     cube.translate(0, 0, 0)
     scene.add_object(cube)
     
-    # Add a ground plane
+    # Добавляем плоскость пола
     ground = Plane(10.0, 10.0)
     ground.translate(0, -2, 0)
     scene.add_object(ground)
@@ -24,23 +31,28 @@ def initialize_demo_scene(scene):
 
 def main():
     """
-    Main function to initialize and run the 3D engine
+    Главная функция для инициализации и запуска 3D движка
+    
+    Выполняет:
+    - Создание основных компонентов (сцена, камера, рендерер)
+    - Инициализацию движка
+    - Запуск главного цикла обработки и рендеринга
     """
     try:
-        # Create main components
+        # Создаем основные компоненты
         scene = Scene()
         scene = initialize_demo_scene(scene)
         camera = Camera(position=(0, 0, -10), target=(0, 0, 0))
         renderer = Renderer()
         input_handler = InputHandler()
         
-        # Create and initialize engine
+        # Создаем и инициализируем движок
         engine = Engine(scene, camera, renderer, input_handler)
         engine.initialize()
         
-        # Main loop variables
-        target_fps = 30
-        frame_time = 1.0 / target_fps
+        # Переменные для контроля частоты кадров
+        target_fps = 30  # Целевое количество кадров в секунду
+        frame_time = 1.0 / target_fps  # Время одного кадра
         last_time = time.time()
         
         try:
@@ -50,13 +62,13 @@ def main():
                 delta_time = current_time - last_time
                 
                 if delta_time >= frame_time:
-                    # Process input
+                    # Обработка пользовательского ввода
                     input_handler.process_input()
                     
-                    # Update game state
+                    # Обновление состояния игры
                     engine.update(delta_time)
                     
-                    # Render frame
+                    # Отрисовка кадра
                     engine.render()
                     
                     last_time = current_time
