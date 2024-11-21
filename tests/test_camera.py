@@ -51,14 +51,29 @@ class TestCamera(unittest.TestCase):
 
     def test_get_view_matrix(self):
         """Test view matrix generation"""
-        matrix = self.camera.get_view_matrix()
+        # Set up camera at origin looking down -Z axis
+        camera = Camera(position=(0, 0, 0), target=(0, 0, -1), up=(0, 1, 0))
+        matrix = camera.get_view_matrix()
+        
+        # Verify matrix dimensions
         self.assertEqual(len(matrix), 4)
         self.assertEqual(len(matrix[0]), 4)
-        # Currently returns identity matrix as per implementation
-        self.assertEqual(matrix, [[1, 0, 0, 0],
-                                [0, 1, 0, 0],
-                                [0, 0, 1, 0],
-                                [0, 0, 0, 1]])
+        
+        # Verify key matrix properties
+        # Right vector should be (1,0,0)
+        self.assertAlmostEqual(matrix[0][0], 1.0)
+        self.assertAlmostEqual(matrix[0][1], 0.0)
+        self.assertAlmostEqual(matrix[0][2], 0.0)
+        
+        # Up vector should be (0,1,0) 
+        self.assertAlmostEqual(matrix[1][0], 0.0)
+        self.assertAlmostEqual(matrix[1][1], 1.0)
+        self.assertAlmostEqual(matrix[1][2], 0.0)
+        
+        # Forward vector should be (0,0,1)
+        self.assertAlmostEqual(matrix[2][0], 0.0)
+        self.assertAlmostEqual(matrix[2][1], 0.0)
+        self.assertAlmostEqual(matrix[2][2], 1.0)
 
 if __name__ == '__main__':
     try:

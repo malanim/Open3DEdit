@@ -71,6 +71,13 @@ class Camera:
         Returns:
             List[List[float]]: Матрица вида 4x4
         """
+        # Normalize up vector first
+        up_length = math.sqrt(sum(x*x for x in self.up))
+        if up_length > 0:
+            up = [x/up_length for x in self.up]
+        else:
+            up = [0, 1, 0]
+            
         # Calculate forward vector (z-axis)
         forward = [
             self.target[0] - self.position[0],
@@ -78,11 +85,11 @@ class Camera:
             self.target[2] - self.position[2]
         ]
         # Normalize forward vector
-        length = math.sqrt(sum(x*x for x in forward))
-        if length < 1e-7:  # Prevent division by zero
+        forward_length = math.sqrt(sum(x*x for x in forward))
+        if forward_length < 1e-7:  # Prevent division by zero
             forward = [0, 0, 1]
         else:
-            forward = [x/length for x in forward]
+            forward = [x/forward_length for x in forward]
         
         # Calculate right vector (x-axis) as cross product of forward and up
         right = [
@@ -106,10 +113,13 @@ class Camera:
         
         # Build view matrix
         view = [
-            [right[0], right[1], right[2], -sum(right[i] * self.position[i] for i in range(3))],
-            [up[0], up[1], up[2], -sum(up[i] * self.position[i] for i in range(3))],
-            [-forward[0], -forward[1], -forward[2], sum(forward[i] * self.position[i] for i in range(3))],
-            [0, 0, 0, 1]
+            [right[0], up[0], -forward[0], 0],
+            [right[1], up[1], -forward[1], 0],
+            [right[2], up[2], -forward[2], 0],
+            [-sum(right[i] * self.position[i] for i in range(3)),
+             -sum(up[i] * self.position[i] for i in range(3)),
+             sum(forward[i] * self.position[i] for i in range(3)),
+             1]
         ]
         
         return view

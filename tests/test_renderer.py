@@ -7,6 +7,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from renderer import Renderer
 from logger_config import setup_logger
 from test_results import TestResults
+from vector import Vector3
+from light import DirectionalLight
 
 logger = setup_logger('renderer_tests')
 test_results = TestResults()
@@ -47,23 +49,54 @@ class TestRenderer(unittest.TestCase):
         self.renderer.width = 100
         self.renderer.height = 50
         
-        # Test valid point with default lighting
-        self.renderer.draw_point(10, 10, 0.5)
+        # Add a test light
+        test_light = DirectionalLight(Vector3(0, -1, 0), 1.0)
+        self.renderer.lights.append(test_light)
         
-        # Test point with custom lighting intensity
-        self.renderer.draw_point(10, 10, 0.5, 0.7)
+        # Test valid point with normal and position
+        normal = Vector3(0, 0, 1)  # Point facing up
+        position = Vector3(0, 0, 0)  # At origin
+        self.renderer.draw_point(10, 10, 0.5, normal, position)
         self.mock_screen.addch.assert_called()
-
-        # Test point outside bounds
-        self.renderer.draw_point(-1, -1, 0.5)
-        self.renderer.draw_point(101, 51, 0.5)
-        # Should not raise any errors for invalid points
+        
+        # Test point with different lighting conditions
+        self.renderer.ambient_intensity = 0.3
+        self.renderer.specular_intensity = 0.5
+        self.renderer.specular_power = 32.0
+        normal = Vector3(1, 0, 0)  # Point facing right
+        position = Vector3(1, 1, 1)
+        self.renderer.draw_point(10, 10, 0.5, normal, position, 0.7)
+        
+        # Test specular reflection
+        normal = Vector3(0, 0, 1)  # Point facing camera
+        position = Vector3(0, 0, 0)
+        self.renderer.draw_point(10, 10, 0.5, normal, position, 1.0)
+        
+        # Test boundary conditions
+        self.renderer.draw_point(-1, -1, 0.5, normal, position)
+        self.renderer.draw_point(101, 51, 0.5, normal, position)
 
     def test_render(self):
         """Test complete render cycle"""
         self.renderer.initialize(self.mock_screen)
         mock_scene = MagicMock()
         mock_camera = MagicMock()
+        
+        # Add a test light
+        from light import DirectionalLight
+        from vector import Vector3
+        test_light = DirectionalLight(direction=Vector3(0, -1, 0), intensity=0.8)
+        self.renderer.add_light(test_light)
+        
+        # Test lighting calculation
+        normal = [0, 1, 0]  # Surface normal pointing up
+        position = [0, 0, 0]
+        self.renderer.draw_point(10, 10, 0.5, normal, position)
+        
+        # Verify total intensity includes ambient and diffuse
+        # Ambient (0.2) + Diffuse (0.8 * 1.0) = 1.0
+        expected_intensity = min(1.0, self.renderer.ambient_intensity + 0.8)
+        self.assertAlmostEqual(expected_intensity, 1.0)
         
         self.renderer.render(mock_scene, mock_camera)
         self.mock_screen.refresh.assert_called_once()

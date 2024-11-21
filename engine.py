@@ -128,6 +128,8 @@ class Engine:
         Запускает процесс рендеринга текущего состояния сцены
         с учетом положения камеры и настроек рендерера
         """
+        # Update renderer lights from scene
+        self.renderer.lights = self.scene.get_lights()
         self.renderer.render(self.scene, self.camera)
         
     def stop(self) -> None:
