@@ -25,15 +25,63 @@ class Engine:
             renderer: Рендерер для отрисовки в консоли
             input_handler: Обработчик пользовательского ввода
         """
+        # Core components
+        """Инициализация движка
+        
+        Args:
+            scene: Сцена с 3D объектами
+            camera: Камера для отображения сцены
+            renderer: Рендерер для отрисовки в консоли
+            input_handler: Обработчик пользовательского ввода
+        """
         self.scene = scene
         self.camera = camera
         self.renderer = renderer
         self.input_handler = input_handler
+        # Engine state
         self.running = False
         self.last_time = 0.0
         self.target_fps = 30
         self.frame_time = 1.0 / self.target_fps
         self.screen = None
+        
+        # Game state
+        self.state = "initializing"  # initializing, running, paused, stopped
+        self.previous_state = None
+        
+        # Component sync
+        self.components_ready = {
+            'scene': False,
+            'camera': False,
+            'renderer': False,
+            'input': False
+        }
+        
+    def set_state(self, new_state: str) -> None:
+        """Изменение состояния движка
+        
+        Args:
+            new_state: Новое состояние (initializing, running, paused, stopped)
+            
+        Raises:
+            ValueError: If transition to new_state is invalid
+        """
+        valid_transitions = {
+            'initializing': ['running', 'stopped'],
+            'running': ['paused', 'stopped'],
+            'paused': ['running', 'stopped'],
+            'stopped': ['initializing']
+        }
+        
+        if new_state not in valid_transitions.get(self.state, []):
+            raise ValueError(f"Invalid state transition from {self.state} to {new_state}")
+            
+        self.previous_state = self.state
+        self.state = new_state
+        
+    def check_components_ready(self) -> bool:
+        """Проверка готовности всех компонентов"""
+        return all(self.components_ready.values())
         
     def initialize(self) -> None:
         """Инициализация движка
@@ -51,8 +99,24 @@ class Engine:
         curses.curs_set(0)
         
         # Инициализация компонентов
-        self.renderer.initialize(self.screen)
-        self.input_handler.initialize(self.screen)
+        try:
+            self.renderer.initialize(self.screen)
+            self.components_ready['renderer'] = True
+            
+            self.input_handler.initialize(self.screen)
+            self.components_ready['input'] = True
+            
+            self.components_ready['scene'] = True
+            self.components_ready['camera'] = True
+            
+            if self.check_components_ready():
+                self.set_state("running")
+            else:
+                raise RuntimeError("Not all components initialized properly")
+                
+        except Exception as e:
+            self.cleanup()
+            raise RuntimeError(f"Initialization failed: {str(e)}")
         
     def cleanup(self) -> None:
         """Очистка ресурсов при выходе
@@ -113,14 +177,21 @@ class Engine:
         - Обновление состояния всех объектов сцены
         - Обновление положения и параметров камеры
         """
-        # Обработка ввода
-        self.input_handler.process_input()
-        
-        # Обновление сцены и объектов
-        self.scene.update(delta_time)
-        
-        # Обновление камеры
-        self.camera.update(delta_time)
+        if self.state != "running":
+            return
+            
+        try:
+            # Обработка ввода
+            self.input_handler.process_input()
+            
+            # Обновление сцены и объектов
+            self.scene.update(delta_time)
+            
+            # Обновление камеры
+            self.camera.update(delta_time)
+        except Exception as e:
+            self.set_state("stopped")
+            raise RuntimeError(f"Update failed: {str(e)}")
         
     def render(self) -> None:
         """Отрисовка сцены

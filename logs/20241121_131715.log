@@ -1,8 +1,0 @@
-2024-11-21 13:17:15,196 - renderer_tests - ERROR - Test test_clear_screen failed
-2024-11-21 13:17:15,198 - renderer_tests - ERROR - Test test_draw_point failed
-2024-11-21 13:17:15,200 - renderer_tests - ERROR - Test test_initialization failed
-2024-11-21 13:17:15,202 - renderer_tests - ERROR - Test test_render failed
-2024-11-21 13:17:15,203 - camera_tests - ERROR - Test test_custom_initialization failed
-2024-11-21 13:17:15,204 - camera_tests - ERROR - Test test_get_view_matrix failed
-2024-11-21 13:17:15,205 - camera_tests - ERROR - Test test_initialization failed
-2024-11-21 13:17:15,205 - camera_tests - ERROR - Test test_move failed

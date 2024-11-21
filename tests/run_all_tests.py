@@ -13,6 +13,8 @@ from test_object import TestObject3D as TestObject
 from test_camera import TestCamera
 from test_input_handler import TestInputHandler
 from test_engine import TestEngine
+from integration_tests import TestIntegration
+from stress_tests import TestPerformance
 
 from logger_config import setup_logger
 from test_results import TestResults
@@ -35,7 +37,9 @@ def run_all_tests():
         TestObject,
         TestCamera,
         TestInputHandler,
-        TestEngine
+        TestEngine,
+        TestIntegration,
+        TestPerformance
     ]
     
     for test_class in test_classes:

@@ -77,6 +77,28 @@ class TestEngine(unittest.TestCase):
         self.engine.running = True
         self.engine.stop()
         self.assertFalse(self.engine.running)
+        self.assertEqual(self.engine.state, "stopped")
+        
+    def test_state_transitions(self):
+        """Test game state transitions"""
+        self.engine.set_state("running")
+        self.assertEqual(self.engine.state, "running")
+        self.assertEqual(self.engine.previous_state, "initializing")
+        
+        self.engine.set_state("paused")
+        self.assertEqual(self.engine.state, "paused")
+        self.assertEqual(self.engine.previous_state, "running")
+        
+    def test_component_readiness(self):
+        """Test component readiness checking"""
+        self.assertFalse(self.engine.check_components_ready())
+        
+        self.engine.components_ready['scene'] = True
+        self.engine.components_ready['camera'] = True
+        self.engine.components_ready['renderer'] = True
+        self.engine.components_ready['input'] = True
+        
+        self.assertTrue(self.engine.check_components_ready())
 
     @patch('time.sleep')
     def test_frame_timing(self, mock_sleep):
