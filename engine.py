@@ -60,6 +60,10 @@ class Engine:
         Raises:
             ValueError: If transition to new_state is invalid
         """
+        valid_states = {'initializing', 'running', 'paused', 'stopped'}
+        if new_state not in valid_states:
+            raise ValueError(f"Invalid state: {new_state}")
+            
         valid_transitions = {
             'initializing': ['running', 'stopped'],
             'running': ['paused', 'stopped'],
@@ -70,28 +74,31 @@ class Engine:
         if new_state not in valid_transitions.get(self.state, []):
             raise ValueError(f"Invalid state transition from {self.state} to {new_state}")
             
+        self.logger.info(f"State transition: {self.state} -> {new_state}")
         self.previous_state = self.state
         self.state = new_state
         
     def check_components_ready(self) -> bool:
         """Проверка готовности всех компонентов и их состояния"""
         if not all(self.components_ready.values()):
+            missing = [k for k, v in self.components_ready.items() if not v]
+            self.logger.warning(f"Components not ready: {missing}")
             return False
             
         # Validate component states
+        validations = {
+            'scene': (self.scene.is_valid, "Scene validation failed"),
+            'camera': (self.camera.is_initialized, "Camera not initialized"),
+            'renderer': (self.renderer.is_ready, "Renderer not ready"),
+            'input': (self.input_handler.is_active, "Input handler not active")
+        }
+        
         try:
-            if not self.scene.is_valid():
-                self.logger.error("Scene validation failed")
-                return False
-            if not self.camera.is_initialized():
-                self.logger.error("Camera not initialized")
-                return False
-            if not self.renderer.is_ready():
-                self.logger.error("Renderer not ready")
-                return False
-            if not self.input_handler.is_active():
-                self.logger.error("Input handler not active")
-                return False
+            for component, (check_fn, error_msg) in validations.items():
+                if not check_fn():
+                    self.logger.error(error_msg)
+                    self.components_ready[component] = False
+                    return False
             return True
         except Exception as e:
             self.logger.error(f"Component validation failed: {str(e)}")
@@ -175,16 +182,29 @@ class Engine:
             self.last_time = time.time()
             self.logger.info("Starting game loop")
             
+            frame_count = 0
+            fps_update_time = self.last_time
+            
             while self.running:
                 current_time = time.time()
                 delta_time = current_time - self.last_time
                 
-                # Ограничение FPS
+                # FPS calculation
+                frame_count += 1
+                if current_time - fps_update_time >= 1.0:
+                    fps = frame_count / (current_time - fps_update_time)
+                    self.logger.debug(f"FPS: {fps:.2f}")
+                    frame_count = 0
+                    fps_update_time = current_time
+                
+                # Frame timing
                 sleep_time = self.frame_time - delta_time
                 if sleep_time > 0:
                     time.sleep(sleep_time)
                     current_time = time.time()
                     delta_time = current_time - self.last_time
+                elif sleep_time < -0.1:  # More than 10% behind target frame time
+                    self.logger.warning(f"Frame time exceeded target by {-sleep_time*1000:.1f}ms")
                 
                 self.last_time = current_time
                 

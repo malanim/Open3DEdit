@@ -81,21 +81,34 @@ class TestEngine(unittest.TestCase):
         
     def test_state_transitions(self):
         """Test game state transitions"""
+        # Test initial state
+        self.assertEqual(self.engine.state, "initializing")
+        
         # Test valid transitions
-        self.engine.set_state("running")
-        self.assertEqual(self.engine.state, "running")
-        self.assertEqual(self.engine.previous_state, "initializing")
+        valid_transitions = [
+            ("running", "initializing"),
+            ("paused", "running"),
+            ("running", "paused"),
+            ("stopped", "running"),
+            ("initializing", "stopped")
+        ]
         
-        self.engine.set_state("paused")
-        self.assertEqual(self.engine.state, "paused")
-        self.assertEqual(self.engine.previous_state, "running")
+        for new_state, expected_previous in valid_transitions:
+            self.engine.state = expected_previous  # Setup initial state
+            self.engine.set_state(new_state)
+            self.assertEqual(self.engine.state, new_state)
+            self.assertEqual(self.engine.previous_state, expected_previous)
         
-        # Test invalid transitions
-        with self.assertRaises(ValueError):
-            self.engine.set_state("initializing")  # Can't go back to initializing from paused
-            
-        with self.assertRaises(ValueError):
+        # Test invalid state
+        with self.assertRaises(ValueError) as cm:
             self.engine.set_state("invalid_state")
+        self.assertIn("Invalid state:", str(cm.exception))
+        
+        # Test invalid transition
+        self.engine.state = "paused"
+        with self.assertRaises(ValueError) as cm:
+            self.engine.set_state("initializing")
+        self.assertIn("Invalid state transition", str(cm.exception))
         
     def test_component_readiness(self):
         """Test component readiness checking"""
