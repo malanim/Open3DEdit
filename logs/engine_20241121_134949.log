@@ -1,6 +1,0 @@
-2024-11-21 13:49:49,326 - __main__ - INFO - Starting 3D Engine Demo
-2024-11-21 13:49:49,326 - engine - INFO - Initializing engine...
-2024-11-21 13:49:49,334 - engine - INFO - Engine initialization completed successfully
-2024-11-21 13:49:49,334 - engine - INFO - Initializing engine...
-2024-11-21 13:49:49,338 - __main__ - ERROR - 
-Error: Initialization failed: Invalid state transition from running to running

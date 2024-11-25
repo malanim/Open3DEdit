@@ -1,177 +1,177 @@
 {
     "test_component_readiness": {
         "status": "FAILED",
-        "timestamp": "2024-11-21T14:00:09.481515",
-        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_engine.py\", line 111, in test_component_readiness\n    self.assertEqual(self.engine.state, \"running\")\nAssertionError: 'initializing' != 'running'\n- initializing\n+ running\n\n"
+        "timestamp": "2024-11-22T21:09:11.581695",
+        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_engine.py\", line 123, in test_component_readiness\n    self.assertTrue(self.engine.check_components_ready())\nAssertionError: False is not true\n"
     },
     "test_frame_timing": {
         "status": "FAILED",
-        "timestamp": "2024-11-21T14:00:09.481515",
-        "error_message": "Traceback (most recent call last):\n  File \"C:\\Program Files\\Python312\\Lib\\unittest\\mock.py\", line 1393, in patched\n    return func(*newargs, **newkeywargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_engine.py\", line 128, in test_frame_timing\n    mock_sleep.assert_called_once()\n  File \"C:\\Program Files\\Python312\\Lib\\unittest\\mock.py\", line 926, in assert_called_once\n    raise AssertionError(msg)\nAssertionError: Expected 'sleep' to have been called once. Called 0 times.\n"
+        "timestamp": "2024-11-22T21:09:11.581695",
+        "error_message": "Traceback (most recent call last):\n  File \"C:\\Program Files\\Python312\\Lib\\unittest\\mock.py\", line 1393, in patched\n    return func(*newargs, **newkeywargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_engine.py\", line 151, in test_frame_timing\n    mock_sleep.assert_called_once()\n  File \"C:\\Program Files\\Python312\\Lib\\unittest\\mock.py\", line 926, in assert_called_once\n    raise AssertionError(msg)\nAssertionError: Expected 'sleep' to have been called once. Called 0 times.\n"
     },
     "test_stop": {
         "status": "FAILED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_engine.py\", line 80, in test_stop\n    self.assertEqual(self.engine.state, \"stopped\")\nAssertionError: 'initializing' != 'stopped'\n- initializing\n+ stopped\n\n"
     },
     "test_update": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_logger_configuration": {
         "status": "FAILED",
-        "timestamp": "2024-11-21T14:00:09.481515",
-        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\integration_tests.py\", line 76, in test_logger_configuration\n    self.assertEqual(mock_get_logger.return_value.level, logging.DEBUG)\nAssertionError: <MagicMock name='getLogger().level' id='2628255410000'> != 10\n"
+        "timestamp": "2024-11-22T21:09:11.581695",
+        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\integration_tests.py\", line 76, in test_logger_configuration\n    self.assertEqual(mock_get_logger.return_value.level, logging.DEBUG)\nAssertionError: <MagicMock name='getLogger().level' id='1304069175488'> != 10\n"
     },
     "test_clear_screen": {
         "status": "FAILED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\renderer.py\", line 43, in initialize\n    self.height, self.width = screen.getmaxyx()\n    ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: not enough values to unpack (expected 2, got 0)\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_renderer.py\", line 42, in test_clear_screen\n    self.renderer.initialize(self.mock_screen)\n  File \"c:\\git_prog\\Open3DEdit\\renderer.py\", line 66, in initialize\n    raise RuntimeError(f\"Failed to initialize renderer: {str(e)}\")\nRuntimeError: Failed to initialize renderer: not enough values to unpack (expected 2, got 0)\n"
     },
     "test_draw_point": {
         "status": "FAILED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\renderer.py\", line 43, in initialize\n    self.height, self.width = screen.getmaxyx()\n    ^^^^^^^^^^^^^^^^^^^^^^^\nValueError: not enough values to unpack (expected 2, got 0)\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\test_renderer.py\", line 48, in test_draw_point\n    self.renderer.initialize(self.mock_screen)\n  File \"c:\\git_prog\\Open3DEdit\\renderer.py\", line 66, in initialize\n    raise RuntimeError(f\"Failed to initialize renderer: {str(e)}\")\nRuntimeError: Failed to initialize renderer: not enough values to unpack (expected 2, got 0)\n"
     },
     "test_initialization": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_render": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_component_synchronization": {
         "status": "FAILED",
-        "timestamp": "2024-11-21T14:00:09.481515",
-        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 144, in initialize\n    raise RuntimeError(\"Not all components initialized properly\")\nRuntimeError: Not all components initialized properly\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\integration_tests.py\", line 58, in test_component_synchronization\n    self.engine.initialize()\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 150, in initialize\n    raise RuntimeError(f\"Initialization failed: {str(e)}\")\nRuntimeError: Initialization failed: Not all components initialized properly\n"
+        "timestamp": "2024-11-22T21:09:11.581695",
+        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 188, in initialize\n    if not self.check_components_ready():\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 94, in check_components_ready\n    'scene': (self.scene.is_valid, \"Scene validation failed\"),\n              ^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Scene' object has no attribute 'is_valid'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\integration_tests.py\", line 58, in test_component_synchronization\n    self.engine.initialize()\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 196, in initialize\n    raise RuntimeError(f\"Initialization failed: {str(e)}\")\nRuntimeError: Initialization failed: 'Scene' object has no attribute 'is_valid'\n"
     },
     "test_frame_rate_stability": {
         "status": "FAILED",
-        "timestamp": "2024-11-21T14:00:09.481515",
-        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 144, in initialize\n    raise RuntimeError(\"Not all components initialized properly\")\nRuntimeError: Not all components initialized properly\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\stress_tests.py\", line 25, in test_frame_rate_stability\n    self.engine.initialize()\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 150, in initialize\n    raise RuntimeError(f\"Initialization failed: {str(e)}\")\nRuntimeError: Initialization failed: Not all components initialized properly\n"
+        "timestamp": "2024-11-22T21:09:11.581695",
+        "error_message": "Traceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 188, in initialize\n    if not self.check_components_ready():\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 94, in check_components_ready\n    'scene': (self.scene.is_valid, \"Scene validation failed\"),\n              ^^^^^^^^^^^^^^^^^^^\nAttributeError: 'Scene' object has no attribute 'is_valid'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"c:\\git_prog\\Open3DEdit\\tests\\stress_tests.py\", line 25, in test_frame_rate_stability\n    self.engine.initialize()\n  File \"c:\\git_prog\\Open3DEdit\\engine.py\", line 196, in initialize\n    raise RuntimeError(f\"Initialization failed: {str(e)}\")\nRuntimeError: Initialization failed: 'Scene' object has no attribute 'is_valid'\n"
     },
     "test_addition": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_length": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_normalize": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_scalar_multiplication": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_subtraction": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_identity": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_translation": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_add_light": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_add_object": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_get_objects": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_remove_object": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_object3d_initialization": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_object3d_rotate": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_object3d_scale": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_object3d_translate": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_custom_initialization": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_get_view_matrix": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_move": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_is_key_pressed": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_process_input_no_keys": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_process_input_with_keys": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_quit_key": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_state_transitions": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     },
     "test_engine_state_transitions": {
         "status": "PASSED",
-        "timestamp": "2024-11-21T14:00:09.481515",
+        "timestamp": "2024-11-22T21:09:11.581695",
         "error_message": null
     }
 }

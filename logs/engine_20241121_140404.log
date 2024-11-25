@@ -1,5 +1,0 @@
-2024-11-21 14:04:04,589 - __main__ - INFO - Starting 3D Engine Demo
-2024-11-21 14:04:04,590 - __main__ - INFO - Creating core components
-2024-11-21 14:04:04,590 - engine - INFO - Initializing engine...
-2024-11-21 14:04:04,601 - __main__ - ERROR - 
-Error: Initialization failed: 'Scene' object has no attribute 'is_valid'
